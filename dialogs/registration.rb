@@ -12,8 +12,10 @@ class Registration
   end
 
   def register
-
+    show_preferences
   end
+
+  private
 
   def show_preferences
 

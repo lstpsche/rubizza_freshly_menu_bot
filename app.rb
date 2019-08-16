@@ -18,7 +18,6 @@ class App
       bot.listen do |message|
         case message.text
         when '/start'
-          # calls registration dialog
           dialogs.registration(chat_id: message.chat.id, user_id: message.from.id)
         when '/help'
           dialogs.help_dialog(chat_id: message.chat.id)
