@@ -1,5 +1,6 @@
 require_relative 'lib/dependencies'
 require_relative 'workers/dialogs'
+require_relative 'helpers/common'
 
 token = ENV['BOT_TOKEN']
 
@@ -18,8 +19,7 @@ class App
         case message.text
         when '/start'
           # calls registration dialog
-          # dialogs.registration
-          bot.api.send_message(chat_id: message.chat.id, text: 'чё каво')
+          dialogs.registration(chat_id: message.chat.id, user_id: message.from.id)
         when '/help'
           dialogs.help_dialog(chat_id: message.chat.id)
         else
@@ -30,4 +30,5 @@ class App
   end
 end
 
+connect_database
 App.new(token: token).run

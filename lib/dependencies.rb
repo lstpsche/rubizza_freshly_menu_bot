@@ -1,3 +1,5 @@
+require 'active_record'
 require 'dotenv/load'
+require 'mysql2'
 require 'pry'
 require 'telegram/bot'
