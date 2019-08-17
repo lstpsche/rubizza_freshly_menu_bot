@@ -73,7 +73,7 @@ class MainDialogHelper
   # returns array of Dish elements with ratings [[dish, rating], [.., ..], ....]
   def get_recomended_menu_for_user
     user = User.find_by(number: user_id)
-    if user.orders.pluck(:rating).empty?
+    if user.orders.pluck(:rating).select{ |rating| rating != 0 }.empty?
       User.find(1).recomended_menu[0...10]
     else
       user.recomended_menu[0...10]
