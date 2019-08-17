@@ -10,9 +10,14 @@ class Dialogs
     @bot = bot
   end
 
-  def help_dialog(chat_id:)
-    # common
-    show_help(bot: bot, chat_id: chat_id)
+  def help_dialog(chat_id:, help:)
+    case help
+    when 1
+      # common
+      show_help_1(bot: bot, chat_id: chat_id)
+    when 2
+      show_help_2(bot: bot, chat_id: chat_id)
+    end
   end
 
   def invalid_message(chat_id:)
@@ -39,7 +44,15 @@ class Dialogs
     show_new_welcome_msg(bot: bot, chat_id: chat_id, user_name: user_name)
   end
 
+  def coming_soon(chat_id:)
+    show_coming_soon_msg(bot: bot, chat_id: chat_id)
+  end
+
   def main_dialog(chat_id:, user_id:)
-    MainDialog.new(bot: bot, chat_id: chat_id, user_id: user_id)
+    MainDialog.new(bot: bot, chat_id: chat_id, user_id: user_id).start
+  end
+
+  def order_confirmed(chat_id:, dish_num:)
+    show_order_confirmed_message(bot: bot, chat_id: chat_id, dish_num: dish_num)
   end
 end

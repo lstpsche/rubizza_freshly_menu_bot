@@ -1,4 +1,5 @@
-HELP_MESSAGE = "/start — registration\n/help — show this message\n"
+HELP_MESSAGE_1 = "/start — registration\n/help — show this message\n"
+HELP_MESSAGE_2 = "\"Full menu\" button — show full Freshly menu.\n\"Recomended menu\" button — show recomended menu\n\"My orders\" button — show your orders\n/help — show this message\n"
 INVALID_COMMAND_MESSAGE = 'Ooops... Sorry, this command is invalid.'
 YES_MSG = 'Yes'
 NO_MSG =  'No'
@@ -9,3 +10,6 @@ DISH_LIKE_DISLIKE = "Did you like %{dish_name}?"
 LIKE = 'Like' # add like icon
 DISLIKE = 'Dislike' # add dislike icon
 COMING_SOON = 'Coming soon...'
+RECOMENDED_MENU = 'Recomended menu'
+CLICK_TO_ORDER = 'Choose any dish to order it.'
+ORDER_CONFIRMED = "Dish #%{dish_num} has been successfully ordered!"

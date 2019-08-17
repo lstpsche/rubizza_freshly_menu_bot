@@ -14,7 +14,7 @@ class RegistrationHelper
 
   def send_vegetarian_preference_msg
     keyboard = Telegram::Bot::Types::ReplyKeyboardMarkup.new(
-      keyboard: [[YES_MSG, NO_MSG], []], one_time_keyboard: true
+      keyboard: [[YES_MSG, NO_MSG], []], remove_keyboard: true, one_time_keyboard: true
     )
 
     bot.api.send_message(chat_id: chat_id, text: VEGETARIAN_QUESTION, reply_markup: keyboard)
