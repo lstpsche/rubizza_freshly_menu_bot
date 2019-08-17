@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 2019_08_17_000954) do
   enable_extension "plpgsql"
 
   create_table "dishes", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name", default: "", null: false
+    t.integer "number", null: false
+    t.string "cuisine", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "number", null: false
-    t.string "cuisine", null: false
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 2019_08_17_000954) do
   end
 
   create_table "user_ingredients", force: :cascade do |t|
-    t.bigint "users_id"
-    t.bigint "ingredients_id"
+    t.bigint "user_id"
+    t.bigint "ingredient_id"
     t.integer "score", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ingredients_id"], name: "index_user_ingredients_on_ingredients_id"
-    t.index ["users_id"], name: "index_user_ingredients_on_users_id"
+    t.index ["ingredient_id"], name: "index_user_ingredients_on_ingredient_id"
+    t.index ["user_id"], name: "index_user_ingredients_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,6 +47,6 @@ ActiveRecord::Schema.define(version: 2019_08_17_000954) do
     t.string "name", null: false
   end
 
-  add_foreign_key "user_ingredients", "ingredients", column: "ingredients_id"
-  add_foreign_key "user_ingredients", "users", column: "users_id"
+  add_foreign_key "user_ingredients", "ingredients"
+  add_foreign_key "user_ingredients", "users"
 end
