@@ -33,4 +33,11 @@ class RegistrationHelper
       end
     end
   end
+
+  def send_success_preferences_setup(chat_id:)
+    markup = Telegram::Bot::Types::ReplyKeyboardRemove.new(
+      remove_keyboard: true
+    )
+    dialogs.success_preferences_setup(chat_id: chat_id, markup: markup)
+  end
 end

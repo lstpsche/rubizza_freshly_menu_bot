@@ -67,4 +67,8 @@ class Dialogs
   def order_disliked(chat_id:, order_id:)
     show_order_disliked_msg(bot: bot, chat_id: chat_id, order_id: order_id)
   end
+
+  def success_preferences_setup(chat_id:, markup:)
+    show_success_preferences_setup_msg(bot: bot, chat_id: chat_id, markup: markup)
+  end
 end

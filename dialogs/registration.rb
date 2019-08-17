@@ -19,7 +19,10 @@ class Registration
     user = db.build_user(number: user_id, name: user_name)
     # update here all needed preferences
     user.update(vegetarian: vegeterian_preference)
-    user.save
+
+    if user.save
+      helper.send_success_preferences_setup(chat_id: chat_id)
+    end
   end
 
   private

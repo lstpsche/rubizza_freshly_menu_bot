@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   validates :vegetarian, inclusion: { in: [true, false] }
   validates :name, presence: true
 
-  has_many :user_ingredients
-  has_many :orders
+  has_many :user_ingredients, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   def recomended_menu
     ingredients_scores = Ingredient.joins(:user_ingredients).pluck(:name, :score).to_h

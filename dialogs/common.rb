@@ -44,3 +44,7 @@ end
 def show_order_disliked_msg(bot:, chat_id:, order_id:)
   bot.api.send_message(chat_id: chat_id, text: ORDER_DISLIKED % {order_id: order_id})
 end
+
+def show_success_preferences_setup_msg(bot:, chat_id:, markup:)
+  bot.api.send_message(chat_id: chat_id, text: SUCCESS_PREFERENCES_SETUP_MSG, markup: markup)
+end

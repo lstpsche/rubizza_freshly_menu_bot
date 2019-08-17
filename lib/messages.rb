@@ -19,3 +19,4 @@ CLICK_TO_RATE = 'You can click on order to rate it.'
 ORDER_LIKED = "Order #%{order_id} liked!"
 ORDER_DISLIKED = "Order #%{order_id} disliked :("
 MAIN_MENU_TEXT = 'Main menu'
+SUCCESS_PREFERENCES_SETUP_MSG = 'Preferences successfully set.'

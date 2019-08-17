@@ -18,6 +18,7 @@ class App
       bot.listen do |message|
         case message
         when Telegram::Bot::Types::Message
+          binding.pry
           case message.text
           when '/start'
             dialogs.registration(chat_id: message.chat.id, user_id: message.from.id, user_name: message.from.first_name)
