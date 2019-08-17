@@ -55,4 +55,16 @@ class Dialogs
   def order_confirmed(chat_id:, dish_num:)
     show_order_confirmed_message(bot: bot, chat_id: chat_id, dish_num: dish_num)
   end
+
+  def no_orders_msg(chat_id:)
+    show_no_orders_msg(bot: bot, chat_id: chat_id)
+  end
+
+  def order_liked(chat_id:, order_id:)
+    show_order_liked_msg(bot: bot, chat_id: chat_id, order_id: order_id)
+  end
+
+  def order_disliked(chat_id:, order_id:)
+    show_order_disliked_msg(bot: bot, chat_id: chat_id, order_id: order_id)
+  end
 end

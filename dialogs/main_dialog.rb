@@ -13,7 +13,9 @@ class MainDialog
   end
 
   def start
-    helper.show_keyboard
-    helper.listen
+    loop do
+      helper.show_keyboard
+      callback = helper.listen
+    end
   end
 end

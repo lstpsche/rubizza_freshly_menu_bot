@@ -32,3 +32,15 @@ end
 def show_order_confirmed_message(bot:, chat_id:, dish_num:)
   bot.api.send_message(chat_id: chat_id, text: ORDER_CONFIRMED % {dish_num: dish_num})
 end
+
+def show_no_orders_msg(bot:, chat_id:)
+  bot.api.send_message(chat_id: chat_id, text: NO_ORDERS)
+end
+
+def show_order_liked_msg(bot:, chat_id:, order_id:)
+  bot.api.send_message(chat_id: chat_id, text: ORDER_LIKED % {order_id: order_id})
+end
+
+def show_order_disliked_msg(bot:, chat_id:, order_id:)
+  bot.api.send_message(chat_id: chat_id, text: ORDER_DISLIKED % {order_id: order_id})
+end
