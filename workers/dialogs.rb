@@ -1,6 +1,7 @@
 require_relative '../lib/dependencies'
 require_relative '../dialogs/common'
 require_relative '../dialogs/registration'
+require_relative '../dialogs/main_dialog'
 
 class Dialogs
   attr_reader :bot
@@ -36,5 +37,9 @@ class Dialogs
   def new_welcome_dialog(chat_id:, user_name:)
     # common
     show_new_welcome_msg(bot: bot, chat_id: chat_id, user_name: user_name)
+  end
+
+  def main_dialog(chat_id:, user_id:)
+    MainDialog.new(bot: bot, chat_id: chat_id, user_id: user_id)
   end
 end

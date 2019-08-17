@@ -5,3 +5,7 @@ NO_MSG =  'No'
 VEGETARIAN_QUESTION = 'Are you a vegetarian?'
 OLD_WELCOME_MSG = "Hello, again, %{user_name}!"
 NEW_WELCOME_MSG = "Hello, %{user_name}!\n\nWe need to setup your preferences.\nPlease, answer some questions."
+DISH_LIKE_DISLIKE = "Did you like %{dish_name}?"
+LIKE = 'Like' # add like icon
+DISLIKE = 'Dislike' # add dislike icon
+COMING_SOON = 'Coming soon...'

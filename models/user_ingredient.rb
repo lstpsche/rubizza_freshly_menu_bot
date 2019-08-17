@@ -3,4 +3,12 @@ class UserIngredient < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :ingredient
+
+  def increase_score
+    update(score: score + 1)
+  end
+
+  def decrease_score
+    update(score: score - 1)
+  end
 end

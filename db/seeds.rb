@@ -7,6 +7,10 @@ connect_database
 
 puts "\n------------------------------------------------\n\n"
 puts 'Cleaning database...'
+# puts '>> Deleting Orders'
+# Order.destroy_all
+# puts '>> Deleting DishIngredient'
+# DishIngredient.destroy_all
 puts '>> Deleting Dishes'
 Dish.destroy_all
 puts '>> Deleting UserIngredients'
@@ -24,7 +28,7 @@ puts 'Done.'
 
 puts "\n------------------------------------------------\n\n"
 puts 'Parsing CSV file with dishes'
-dishes_table = Csv.parse_file(file_path: "#{ENV['APP_ROOT']}/external_files/dish_ingredients_matrix.csv")
+dishes_table = Csv.parse_file(file_path: "#{ENV['APP_ROOT']}/external_files/dish_ingredients_matrix.csv")[0..200]
 puts 'Done.'
 
 puts "\n------------------------------------------------\n\n"
@@ -52,6 +56,19 @@ end
 puts 'Done.'
 
 puts "\n------------------------------------------------\n\n"
+puts 'Fulfilling DishIngredient base'
+dishes_table.each do |dish|
+  dish_model = Dish.find_by(number: dish['id'].to_i)
+  dish_ingredients = dish.to_h.select { |_key, val| val.to_i == 1 }.keys
+
+  dish_ingredients.each do |ingredient_name|
+    DishIngredient.create(dish: dish_model, ingredient: Ingredient.find_by(name: ingredient_name))
+  end
+end
+puts 'Done.'
+
+
+puts "\n------------------------------------------------\n\n"
 puts 'Creating UserIngredient base'
 ingredients.each do |ingredient|
   ing = Ingredient.find_by(name: ingredient)
@@ -60,11 +77,19 @@ end
 puts 'Done.'
 
 puts "\n------------------------------------------------\n\n"
-puts 'Randomly updating UserIngredients score (for default_user)'
-max_ingrs = ingredients.count > 1000 ? 1000 : ingredients.count / 2
-random_ingredients = ingredients.shuffle[0..max_ingrs]
-random_ingredients.each do |ingredient|
-  ing = Ingredient.find_by(name: ingredient)
-  UserIngredient.find_by(user: default_user, ingredient: ing).update(score: rand(-15..15))
+puts 'Creating Orders base with random ratings'
+max_dishes = dishes_numbers.count > 1000 ? 1000 : dishes_numbers.count / 2
+rand_dishes_nums = dishes_numbers.shuffle[0..max_dishes]
+rand_dishes_nums.each do |dish_num|
+  dish = Dish.find_by(number: dish_num)
+  order = Order.create(user: default_user, dish: dish, rating: rand(-1..1))
+  case order.rating
+  when 1
+    order.dish.dish_ingredients.each { |dish_ingred| UserIngredient.where(user: default_user, ingredient_id: dish_ingred.ingredient_id).take.increase_score }
+    # order.dish.ingredients.each { |ingred| UserIngredient.where(user: default_user, ingredient: ingred).increase_score }
+  when -1
+    order.dish.dish_ingredients.each { |dish_ingred| UserIngredient.where(user: default_user, ingredient_id: dish_ingred.ingredient_id).take.decrease_score }
+    # order.dish.ingredients.each { |ingred| UserIngredient.where(user: default_user, ingredient: ingred).decrease_score }
+  end
 end
 puts 'Done.'

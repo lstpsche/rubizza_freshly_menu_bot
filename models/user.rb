@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   validates :name, presence: true
 
   has_many :user_ingredients
+  has_many :orders
 end

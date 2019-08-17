@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_17_000954) do
+ActiveRecord::Schema.define(version: 2019_08_17_030531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dish_ingredients", force: :cascade do |t|
+    t.bigint "dish_id"
+    t.bigint "ingredient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_dish_ingredients_on_dish_id"
+    t.index ["ingredient_id"], name: "index_dish_ingredients_on_ingredient_id"
+  end
 
   create_table "dishes", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -27,6 +36,16 @@ ActiveRecord::Schema.define(version: 2019_08_17_000954) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "dish_id"
+    t.integer "rating", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_orders_on_dish_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "user_ingredients", force: :cascade do |t|
@@ -47,6 +66,10 @@ ActiveRecord::Schema.define(version: 2019_08_17_000954) do
     t.string "name", null: false
   end
 
+  add_foreign_key "dish_ingredients", "dishes"
+  add_foreign_key "dish_ingredients", "ingredients"
+  add_foreign_key "orders", "dishes"
+  add_foreign_key "orders", "users"
   add_foreign_key "user_ingredients", "ingredients"
   add_foreign_key "user_ingredients", "users"
 end
