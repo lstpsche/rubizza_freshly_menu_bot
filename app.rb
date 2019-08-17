@@ -16,7 +16,6 @@ class App
       @dialogs = Dialogs.new(bot: bot)
 
       bot.listen do |message|
-        binding.pry
         case message.text
         when '/start'
           dialogs.registration(chat_id: message.chat.id, user_id: message.from.id, user_name: message.from.first_name)

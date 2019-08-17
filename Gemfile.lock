@@ -36,6 +36,7 @@ GEM
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    csv (3.1.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     dotenv (2.7.5)
@@ -98,6 +99,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  csv
   dotenv
   pg
   pry
